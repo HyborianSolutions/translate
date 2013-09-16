@@ -1,0 +1,15 @@
+{
+    "name": "hyborian/translate",
+    "description": "A simple translation framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Wiseman",
+            "email": "trollboy@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}
