@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "require": { 
-        "hyborian/config": "dev-master",
+        "hyborian/config": "dev-master"
     },
     "autoload": {
         "psr-0" : {
