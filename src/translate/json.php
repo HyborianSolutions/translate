@@ -30,11 +30,16 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace translate; 
-echo 'loaded ' . __FILE__;
-if(!defined('APP_DIR')
+ 
+if(!defined('APP_DIR'))
 {
-	$path = explode(vendor, __FILE__);
+	$path = explode('vendor', __FILE__);
 	define('APP_DIR', $path[0] . '/');
+}
+if(!defined('LANG_DIR'))
+{
+	$path = explode('vendor', __FILE__);
+	define('LANG_DIR', $path[0] . '/data/languages');
 }
 
 /**
@@ -45,12 +50,33 @@ if(!defined('APP_DIR')
  */
 class json
 {
-	private static $language = NULL;
-	public static $langpath = APP_DIR . 'data/languages';
+	private static $language = NULL; 
 
-
-	public static translate($key, $section="main")
+	public static function translate ($key, $section = "main")
 	{
-		echo 'Hello World'
+		echo 'Hello World';
+	}
+
+	public static function save($language, $key, $value, $section = "main")
+	{
+		echo 'Saving';
+	}
+
+	public static function createLang($language)
+	{
+		mkdir(LANG_DIR . '/' . strtolower($language));
+		touch(LANG_DIR . '/' . strtolower($language) . '/main.json');
+	}
+
+	public static function createSection($section)
+	{ 
+		$languages = scandir(LANG_DIR);
+		foreach ($languages as $eachlang) 
+		{
+			if(is_dir(LANG_DIR . '/' . $eachlang))
+			{
+				touch(LANG_DIR . '/' . $eachlang . '/' . $section '.json');
+			}
+		} 
 	}
 }
