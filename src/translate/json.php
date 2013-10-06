@@ -34,7 +34,7 @@ namespace translate;
 if(!defined('APP_DIR'))
 {
 	$path = explode('vendor', __FILE__);
-	define('APP_DIR', $path[0] . '/');
+	define('APP_DIR', $path[0] . DIRECTORY_SEPARATOR);
 }
 if(!defined('LANG_DIR'))
 {
@@ -64,8 +64,8 @@ class json
 
 	public static function createLang($language)
 	{
-		mkdir(LANG_DIR . '/' . strtolower($language));
-		touch(LANG_DIR . '/' . strtolower($language) . '/main.json');
+		mkdir(LANG_DIR . DIRECTORY_SEPARATOR . strtolower($language));
+		touch(LANG_DIR . DIRECTORY_SEPARATOR . strtolower($language) . '/main.json');
 	}
 
 	public static function createSection($section)
@@ -73,10 +73,15 @@ class json
 		$languages = scandir(LANG_DIR);
 		foreach ($languages as $eachlang) 
 		{
-			if(is_dir(LANG_DIR . '/' . $eachlang))
+			if(is_dir(LANG_DIR . DIRECTORY_SEPARATOR . $eachlang))
 			{
-				touch(LANG_DIR . '/' . $eachlang . '/' . $section '.json');
+				touch(LANG_DIR . DIRECTORY_SEPARATOR . $eachlang . DIRECTORY_SEPARATOR . $section . '.json');
 			}
+            else 
+            {
+                mkdir(LANG_DIR . DIRECTORY_SEPARATOR . $eachlang);
+                touch(LANG_DIR . DIRECTORY_SEPARATOR . $eachlang . DIRECTORY_SEPARATOR . $section . '.json');
+            }
 		} 
 	}
 }
